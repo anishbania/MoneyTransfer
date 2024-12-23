@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using UsersApp.Areas.Admin.Models;
 using UsersApp.Models;
 
 namespace UsersApp.Data
@@ -9,5 +10,6 @@ namespace UsersApp.Data
         public AppDbContext(DbContextOptions options) : base(options)
         {
         }
+        public DbSet<TransactionDetails> TransactionDetails { get; set; }
     }
 }

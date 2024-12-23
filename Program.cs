@@ -1,7 +1,10 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using UsersApp.Areas.Admin.Interface;
+using UsersApp.Areas.Admin.Repository;
 using UsersApp.Data;
 using UsersApp.Models;
+using UsersApp.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,6 +27,10 @@ builder.Services.AddIdentity<Users, IdentityRole>(options =>
 })
     .AddEntityFrameworkStores<AppDbContext>()
     .AddDefaultTokenProviders();
+builder.Services.AddScoped<ITransaction, TransactionRepository>();
+builder.Services.AddScoped<ForexService>();
+
+builder.Services.AddHttpClient<ForexService>();
 
 var app = builder.Build();
 
@@ -41,9 +48,11 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
+app.MapControllerRoute(
+    name: "Areas",
+    pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
 
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
-
 app.Run();

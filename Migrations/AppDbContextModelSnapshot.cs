@@ -155,6 +155,73 @@ namespace UsersApp.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("UsersApp.Areas.Admin.Models.TransactionDetails", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<long?>("AccountNumber")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("AddressReceiver")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("AddressSender")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("BankName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CountryReceiver")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CountrySender")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<double?>("ExchangeRate")
+                        .HasColumnType("float");
+
+                    b.Property<string>("FirstNameReceiver")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FirstNameSender")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastNameReceiver")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastNameSender")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MiddleNameReceiver")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MiddleNameSender")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<double?>("PayoutAmount")
+                        .HasColumnType("float");
+
+                    b.Property<string>("RecipientEmail")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("TransactionDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<double?>("TransferAmount")
+                        .HasColumnType("float");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TransactionDetails");
+                });
+
             modelBuilder.Entity("UsersApp.Models.Users", b =>
                 {
                     b.Property<string>("Id")

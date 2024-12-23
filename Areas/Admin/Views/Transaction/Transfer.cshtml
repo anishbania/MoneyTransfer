@@ -1,0 +1,179 @@
+﻿@using UsersApp.Areas.Admin.ViewModel;
+@model TransactionDetailsViewModel;
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@{
+    ViewData["Title"] = "Send Money";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+<div id="main-wrapper">
+    <div id="content" class="py-4">
+        <div class="container">
+            <h2 class="font-weight-400 text-center mt-3">Send Money</h2>
+            <p class="text-4 text-center mb-4">Send your money on anytime, anywhere in the world.</p>
+            <div class="row">
+                <div class="col-md-8 col-lg-6 col-xl-5 mx-auto">
+                    <div class="bg-light shadow-sm rounded p-3 p-sm-4 mb-4">                      
+                        <form asp-controller="Transaction" asp-action="Transfer">
+                            <input asp-for="Id" hidden />
+                            <h3 class="text-5 font-weight-400 mb-3">  Sender Details</h3>
+                            <div class="form-group">
+                                <label asp-for="FirstNameSender"></label>
+                                <input type="text" asp-for="FirstNameSender" class="form-control" data-bv-field="emailid" id="emailID" required placeholder="Enter Email Address">
+                                <span asp-validation-for="FirstNameSender" class="text-danger"></span>
+                            </div> 
+                            <div class="form-group">
+                                <label asp-for="MiddleNameSender"></label>
+                                <input type="text"  asp-for="MiddleNameSender" class="form-control" data-bv-field="emailid" id="emailID" required placeholder="Enter Email Address">
+                                <span asp-validation-for="MiddleNameSender" class="text-danger"></span>
+
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="LastNameSender"></label>
+                                <input type="text"  asp-for="LastNameSender" class="form-control" data-bv-field="emailid" id="emailID" required placeholder="Enter Email Address">
+                                <span asp-validation-for="LastNameSender" class="text-danger"></span>
+
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="AddressSender"></label>
+                                <input type="text" value="" asp-for="AddressSender" class="form-control" data-bv-field="emailid" id="emailID" required placeholder="Enter Email Address">
+                                <span asp-validation-for="AddressSender" class="text-danger"></span>
+
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="CountrySender"></label>
+                                <input type="text" asp-for="CountrySender" class="form-control" data-bv-field="emailid" id="emailID" required placeholder="Enter Email Address">
+                                <span asp-validation-for="CountrySender" class="text-danger"></span>
+                            </div>
+                     
+                            <h3 class="text-5 font-weight-400 mb-3">  Receiver Details</h3>
+                            <div class="form-group">
+                                <label asp-for="FirstNameReceiver"></label>
+                                <input type="text"  asp-for="FirstNameReceiver" class="form-control" data-bv-field="emailid" id="emailID" required placeholder="Enter Email Address">
+                                <span asp-validation-for="FirstNameReceiver" class="text-danger"></span>
+
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="MiddleNameReceiver"></label>
+                                <input type="text"  asp-for="MiddleNameReceiver" class="form-control" data-bv-field="emailid" id="emailID" required placeholder="Enter Email Address">
+                                <span asp-validation-for="MiddleNameReceiver" class="text-danger"></span>
+
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="LastNameReceiver"></label>
+                                <input type="text" asp-for="LastNameReceiver" class="form-control" data-bv-field="emailid" id="emailID" required placeholder="Enter Email Address">
+                                <span asp-validation-for="LastNameReceiver" class="text-danger"></span>
+
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="RecipientEmail"></label>
+                                <input type="text" asp-for="RecipientEmail" class="form-control" data-bv-field="emailid" id="emailID" required placeholder="Enter Email Address">
+                                <span asp-validation-for="RecipientEmail" class="text-danger"></span>
+
+                            </div> 
+                            <div class="form-group">
+                                <label asp-for="AddressReceiver"></label>
+                                <input type="text" asp-for="AddressReceiver" class="form-control" data-bv-field="emailid" id="emailID" required placeholder="Enter Email Address">
+                                <span asp-validation-for="AddressReceiver" class="text-danger"></span>
+
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="CountryReceiver"></label>
+                                <input type="text" asp-for="CountryReceiver" class="form-control" data-bv-field="emailid" id="emailID" required placeholder="Enter Email Address">
+                                <span asp-validation-for="CountryReceiver" class="text-danger"></span>
+
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="BankName"></label>
+                                <input asp-for="BankName" class="form-control" required placeholder="Enter Email Address">
+                                <span asp-validation-for="BankName" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="AccountNumber"></label>
+                                <input asp-for="AccountNumber" class="form-control"  required placeholder="Enter Email Address">
+                                <span asp-validation-for="AccountNumber" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Description"></label>
+                                <input type="text" asp-for="Description" class="form-control" required>
+                                <span asp-validation-for="Description" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label for="youSend">You Send</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend"> <span class="input-group-text">$</span> </div>
+                                    <input asp-for="TransferAmount" class="form-control" data-bv-field="youSend" id="youSend" oninput="convertToNepaliCurrency()" placeholder="">                  
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="recipientGets">Recipient Gets</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend"> <span class="input-group-text">$</span> </div>
+                                    <input asp-for="PayoutAmount" class="form-control" data-bv-field="recipientGets" id="recipientGets" readonly placeholder="">                                  
+                                </div>
+                            </div>
+                            <p class="text-muted mb-1">Total fees: <span class="font-weight-500">7.5 MYR</span></p>
+                            <p class="text-muted">
+                                The current exchange rate is <span class="font-weight-500">1 MYR = <span id="currentRate">...</span> NPR</span>
+                            </p>
+                           
+                            <input class="btn btn-primary btn-block" type="submit" value="Continue"/>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer id="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg d-lg-flex align-items-center">
+                    <ul class="nav justify-content-center justify-content-lg-start text-3">
+                        <li class="nav-item"> <a class="nav-link active" href="#">About Us</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="#">Support</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="#">Help</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="#">Careers</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="#">Affiliate</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="#">Fees</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg d-lg-flex justify-content-lg-end mt-3 mt-lg-0">
+                    <ul class="social-icons justify-content-center">
+                        <li class="social-icons-facebook"><a data-toggle="tooltip" href="http://www.facebook.com/" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a></li>
+                        <li class="social-icons-twitter"><a data-toggle="tooltip" href="http://www.twitter.com/" target="_blank" title="Twitter"><i class="fab fa-twitter"></i></a></li>
+                        <li class="social-icons-google"><a data-toggle="tooltip" href="http://www.google.com/" target="_blank" title="Google"><i class="fab fa-google"></i></a></li>
+                        <li class="social-icons-youtube"><a data-toggle="tooltip" href="http://www.youtube.com/" target="_blank" title="Youtube"><i class="fab fa-youtube"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-copyright pt-3 pt-lg-2 mt-2">
+                <div class="row">
+                    <div class="col-lg">
+                        <p class="text-center text-lg-left mb-2 mb-lg-0">Copyright &copy; 2024 <a href="#">Payyed</a>. All Rights Reserved.</p>
+                    </div>
+                    <div class="col-lg d-lg-flex align-items-center justify-content-lg-end">
+                        <ul class="nav justify-content-center">
+                            <li class="nav-item"> <a class="nav-link active" href="#">Security</a></li>
+                            <li class="nav-item"> <a class="nav-link" href="#">Terms</a></li>
+                            <li class="nav-item"> <a class="nav-link" href="#">Privacy</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- Footer end -->
+
+</div>
+<script src="~/js/exchangerate.js"></script>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial.cshtml");
+    }
+}
+
+
+
+
+

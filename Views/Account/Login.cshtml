@@ -6,45 +6,87 @@
     Layout = "~/Views/Shared/_AccountLayout.cshtml";
 }
 
-<div class="account-container">
-    <div class="account-box">
-        <h2 class="text-center mb-4">Login</h2>
-        <form asp-action="Login" method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="mb-3">
-                <label asp-for="Email" class="form-label"></label>
-                <input asp-for="Email" class="form-control" />
-                <span asp-validation-for="Email" class="text-danger"></span>
+<div id="main-wrapper" class="h-100">
+    <div class="container-fluid px-0 h-100">
+        <div class="row no-gutters h-100">
+            <!-- Welcome Text ============================================= -->
+            <div class="col-md-6">
+                <div class="hero-wrap d-flex align-items-center h-100">
+                    <div class="hero-mask opacity-8 bg-primary"></div>
+                    <div class="hero-bg hero-bg-scroll" style="background-image:url('/images/bg/image-3.jpg');"></div>
+                    <div class="hero-content mx-auto w-100 h-100 d-flex flex-column">
+                        <div class="row no-gutters">
+                            <div class="col-10 col-lg-9 mx-auto">
+                                <div class="logo mt-5 mb-5 mb-md-0">
+                                    <a class="d-flex" asp-controller="Home" asp-action="Index" title="App Name">
+                                        <img src="/images/logo-light.png" />
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row no-gutters my-auto">
+                            <div class="col-10 col-lg-9 mx-auto">
+                                <h1 class="text-11 text-white mb-4">Welcome back!</h1>
+                                <p class="text-4 text-white line-height-4 mb-5">We are glad to see you again! Instant deposits, withdrawals & payouts trusted by millions worldwide.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="mb-3">
-                <label asp-for="Password" class="form-label"></label>
-                <input asp-for="Password" class="form-control" />
-                <span asp-validation-for="Password" class="text-danger"></span>
+            <!-- Welcome Text End -->
+            <!-- Login Form ============================================= -->
+            <div class="col-md-6 d-flex align-items-center">
+                <div class="container my-4">
+                    <div class="row">
+                        <div class="col-11 col-lg-9 col-xl-8 mx-auto">
+                            <h3 class="font-weight-400 mb-4">Log In</h3>
+                            <form asp-action="Login" method="post">
+                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                <div class="form-group">
+                                    <label asp-for="Email">Email Address</label>
+                                    <input asp-for="Email" class="form-control" placeholder="Enter Your Email" />
+                                    <span asp-validation-for="Email" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="Password">Password</label>
+                                    <input asp-for="Password" class="form-control" placeholder="Enter Password" />
+                                    <span asp-validation-for="Password" class="text-danger"></span>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm">
+                                        <div class="form-check custom-control custom-checkbox">
+                                            <input asp-for="RememberMe" id="remember-me" class="custom-control-input" type="checkbox">
+                                            <label class="custom-control-label" for="remember-me">@Html.DisplayNameFor(a => a.RememberMe)</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm text-right">
+                                        <a asp-controller="Account" asp-action="VerifyEmail" class="btn-link">Forgot Password?</a>
+                                    </div>
+                                </div>
+                                <button class="btn btn-primary btn-block my-4" type="submit">Login</button>
+                            </form>
+                            <p class="text-3 text-center text-muted">
+                                Don't have an account?
+                                <a asp-controller="Account" asp-action="Register" class="btn-link">Sign Up</a>
+                            </p>
+                            <div class="text-center">
+                                <a asp-controller="Home" asp-action="Index" class="btn-link mt-3">Back</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="float-end">
-                <a asp-controller="Account" asp-action="VerifyEmail" class="text-decoration-none">
-                    Forgot password?
-                </a>
-            </div>
-            <div class="form-check mb-3">
-                <label class="form-check-label">
-                    <input asp-for="RememberMe" class="form-check-input" />
-                    @Html.DisplayNameFor(a=> a.RememberMe)
-                </label>
-            </div>
-            <input type="submit" value="Login" class="btn btn-success w-100 p-2" />
-            <p class="text-center mt-2">
-                Don't have an account? <a asp-controller="Account" asp-action="Register" class="text-decoration-none">Register</a>
-            </p>
-            <div class="text-center">
-                <a asp-controller="Home" asp-action="Index" class="text-decoration-none mt-3">Back</a>
-            </div>
-        </form>
+            <!-- Login Form End -->
+        </div>
     </div>
 </div>
 
-@section Scripts{
+@section Scripts {
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial.cshtml");
     }
 }
+
+
+
+
